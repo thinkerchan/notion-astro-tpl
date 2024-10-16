@@ -1,0 +1,56 @@
+---
+import { SITE } from '../config';
+---
+
+<script is:inline define:vars={{ SITE }}>
+  const mod = {
+    timePrefix:'t-',
+    expire:1000*60*60,
+    load:function(libName,libUrl){
+      let aval = (new Date).getTime() - localStorage.getItem(this.timePrefix+libName) < this.expire;
+      let libStr = localStorage.getItem(libName)
+      if (aval && libStr ) {
+        this.parseAndInsert(libStr)
+        this.genCmt()
+      }else{
+        this.ajax(libUrl,(str)=>{
+          localStorage.setItem(libName, str)
+          localStorage.setItem(this.timePrefix+libName, (new Date).getTime())
+          this.parseAndInsert(str)
+          this.genCmt()
+        })
+      }
+    },
+    parseAndInsert(rawStr) {
+      let script = document.createElement('script')
+      script.innerHTML = rawStr
+      document.body.appendChild(script)
+    },
+    ajax:function(url,cb){
+      let xhr = new XMLHttpRequest;
+      xhr.open('get', url, true)
+      xhr.send();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          cb && cb(xhr.responseText)
+        }
+      }
+    },
+    genCmt(){
+      let t = setTimeout(() => {
+        window.Waline && Waline.init({
+          el: '#Jcomment',
+          serverURL: SITE.cmtURL,
+          copyright:false,
+        });
+        clearTimeout(t)
+        t = null;
+      }, 100);
+    },
+    cmtSdk: SITE.cmtJs,
+  }
+
+  document.getElementById('Jcomment') && SITE.cmtURL && mod.load('lib-cmt',mod.cmtSdk);
+</script>
+
+{SITE.pv ?<script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>:''}

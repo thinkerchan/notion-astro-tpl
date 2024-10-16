@@ -1,0 +1,27 @@
+---
+import { SITE } from '../config';
+import '../styles/global.css';
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="App Showcase" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <link rel="stylesheet" href="/css/github-markdown.min.css">
+    <link rel="stylesheet" href={SITE.cmtCss}>
+  </head>
+  <body class="bg-slate-50 text-slate-900" >
+    <slot />
+    <script defer src="https://tongji.linkroutes.com/script.js" data-website-id="88ec7da4-8933-40cd-b16f-b2c35d11230d"></script>
+  </body>
+</html>
