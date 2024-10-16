@@ -383,12 +383,17 @@ export function formatter(blocks: any[]) {
         break;
       case 'bulleted_list_item':
         if (obj.BulletedListItem) {
-          content += `- ${_formatRichTexts(obj.BulletedListItem.RichTexts)}\n`;
+          content += `- ${_formatRichTexts(obj.BulletedListItem.RichTexts)}`;
+          if (blocks[blocks.indexOf(block) + 1]?.type === 'bulleted_list_item') {
+            content += '\n';
+          } else {
+            content += '\n\n';
+          }
         }
         break;
       case 'numbered_list_item':
         if (obj.NumberedListItem) {
-          content += `- ${_formatRichTexts(obj.NumberedListItem.RichTexts)}\n`;
+          content += `1. ${_formatRichTexts(obj.NumberedListItem.RichTexts)}\n`;
         }
         break;
       case 'to_do':
