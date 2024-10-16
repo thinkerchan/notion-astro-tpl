@@ -30,13 +30,17 @@ const htmlContent = marked(app.content);
           >{tag.name}</span>
         ))}
       </div>
-      <div class="mb-6">
-        <!-- <pre class="bg-gray-100 p-4 rounded-lg whitespace-pre-wrap">{app.content}</pre> -->
-         <div class="markdown-body" set:html={htmlContent}></div>
-      </div>
+
       <a href="/" class="block text-center text-blue-500 hover:underline mb-6">
         &larr; Back to Home Page
       </a>
+
+      <hr class="mb-6">
+
+      <div class="mb-6">
+         <div class="markdown-body" set:html={htmlContent}></div>
+      </div>
+
       <div id="Jcomment"></div>
     </div>
 
