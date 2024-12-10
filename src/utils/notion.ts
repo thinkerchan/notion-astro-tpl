@@ -26,7 +26,7 @@ async function fetchAppsFromNotion() {
           id: pageId,
           title: page.properties.title.title[0]?.plain_text,
           desc: page.properties.desc.rich_text[0]?.plain_text,
-          icon: page.properties.icon.files[0].type === 'external' ? page.properties.icon.files[0].external.url : page.properties.icon.files[0]?.file.url,
+          icon: page.properties.icon.files[0]?.type === 'external' ? page.properties.icon.files[0].external.url : page.properties.icon.files[0]?.file.url,
           link: page.properties.link.url,
           tags: page.properties.tags.multi_select.map((tag: any) => {
             return {
