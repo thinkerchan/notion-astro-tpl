@@ -23,5 +23,10 @@ const { title } = Astro.props;
   <body class="bg-slate-50 text-slate-900" >
     <slot />
     <script defer src="https://tongji.linkroutes.com/script.js" data-website-id="88ec7da4-8933-40cd-b16f-b2c35d11230d"></script>
+    {
+      SITE.buyMeCoffeeId && (
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id={SITE.buyMeCoffeeId} data-description="Support me on Buy me a coffee!" data-message="" data-color="#5F7FFF" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+      )
+    }
   </body>
 </html>

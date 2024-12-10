@@ -18,7 +18,13 @@ const htmlContent = marked(app.content);
 
 <Layout title={`${app.title} | ${SITE.author}`}>
   <main class="max-w-5xl  mx-auto px-4 lg:px-12  py-12">
-    <div class="mx-auto bg-white rounded-lg shadow-md p-6">
+    <div class="mx-auto bg-white rounded-lg shadow-md p-6 relative">
+      <div class="absolute left-4 top-4 text-gray-600 hover:text-gray-900">
+        <a href="/">
+          <svg t="1733825105812" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1462" width="28" height="28"><path d="M622.651 263.568h-174.906v-142.078l-383.764 191.881 383.763 191.882 0-141.752h189.391c149.914 0 224.855 62.789 224.855 188.368 0 129.928-77.436 194.876-232.339 194.876h-441.7v99.932h446.194c211.185 0 316.778-95.104 316.778-285.311-0-198.521-109.414-297.798-328.274-297.798z" p-id="1463" fill="#8a8a8a"></path></svg>
+        </a>
+      </div>
+
       <div class="flex flex-col md:flex-row items-center md:items-start gap-6 p-4">
         <img
           src={app.icon || '/images/avatar.png'}
@@ -32,6 +38,15 @@ const htmlContent = marked(app.content);
           </h1>
 
           <div class="space-y-2 text-gray-600">
+
+            <div class="flex flex-wrap gap-3 ">
+              {app.tags.map((tag) => (
+                <span
+                class="px-3 py-1 rounded-full text-xs font-medium transition-colors duration-200"
+                style={`background-color: color-mix(in srgb, ${tag.color} 20%, transparent); color: color-mix(in srgb, ${tag.color} 80%, black);`}
+              >{tag.name}</span>
+            ))}
+            </div>
 
             <p class="flex">
               <span class="text-gray-700 mr-6">📅 {app.date}</span>
@@ -48,20 +63,6 @@ const htmlContent = marked(app.content);
                 </>
               )}
             </p>
-
-            <div class="flex">
-              🔖
-              <div class="flex flex-wrap gap-2 ">
-                {app.tags.map((tag) => (
-                  <span
-                  class="px-3 py-1 rounded-full text-xs font-medium transition-colors duration-200"
-                  style={`background-color: color-mix(in srgb, ${tag.color} 20%, transparent); color: color-mix(in srgb, ${tag.color} 80%, black);`}
-                >{tag.name}</span>
-              ))}
-              </div>
-            </div>
-
-
 
             <p>
               🤖 {app.desc}
