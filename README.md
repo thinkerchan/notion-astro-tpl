@@ -41,3 +41,7 @@ export const SITE = {
 你可以按下图创建数据库，站点描述默认读取SITE.description, 如果有自定义描述则优先读取自定义描述
 
 ![](https://telegram-file.vercel.app/api/file/BQACAgUAAxkDAAP3Z1gOteYx2g0FVsCFy_8VqNWRUVAAApETAAIv6sFWaGSTdqzXHjs2BA.png)
+
+## 注意事项
+
+如你对notion数据库进行了修改，都需要去vercel重新部署
