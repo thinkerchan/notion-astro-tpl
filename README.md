@@ -34,8 +34,10 @@ export const SITE = {
   "pv":true // 是否开启访问量统计
 }
 ```
-## ⚠️ 注意事项
+## 创建notion数据库
 
 > notion数据库的icon字段,和页面内markdown的图片链接尽量用链接的形式，否则可能会受到notion referer的限制而无法显示(假设你不公开notion页面)
 
-![](http://t-qiniu.linkroutes.com/uPic/ofVl42_dGwKmo.png)
+你可以按下图创建数据库，站点描述默认读取SITE.description, 如果有自定义描述则优先读取自定义描述
+
+![](https://telegram-file.vercel.app/api/file/BQACAgUAAxkDAAP3Z1gOteYx2g0FVsCFy_8VqNWRUVAAApETAAIv6sFWaGSTdqzXHjs2BA.png)
