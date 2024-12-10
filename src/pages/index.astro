@@ -2,16 +2,19 @@
 import Layout from '../layouts/Layout.astro';
 import AppCard from '../components/AppCard.astro';
 import Header from '../components/Header.astro';
-import { getApps } from '../utils/notion';
+import { getApps, getDatabase } from '../utils/notion';
 import { SITE } from '../config';
 
 const apps = await getApps();
+const db = await getDatabase();
 ---
 
 <Layout title={`${SITE.author}`}>
   <Header />
   <main class="container min-h-full mx-auto px-4 lg:px-12  pb-20">
-    <h1 class="text-4xl lg:text-6xl font-bold text-center py-16  bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-secondary-500">{SITE.title}</h1>
+    <h1 class="text-4xl lg:text-6xl font-bold text-center py-16  bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-secondary-500">
+      {db.description || SITE.title}
+    </h1>
     <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-10 lg:gap-y-6">
       {apps.map((app) => (
           <AppCard

@@ -12,6 +12,17 @@ export async function getApps() {
   return fetchAppsFromNotion();
 }
 
+export async function getDatabase() {
+  const database = await notion.databases.retrieve({
+    database_id: databaseId
+  });
+
+  return {
+    title: database.title[0]?.plain_text || '',
+    description: database.description[0]?.plain_text || ''
+  };
+}
+
 async function fetchAppsFromNotion() {
   try {
     const response = await notion.databases.query({
