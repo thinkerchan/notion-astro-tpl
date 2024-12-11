@@ -8,7 +8,7 @@ interface Props {
 }
 
 const { id, title, description, icon, tags } = Astro.props;
-
+import Tag from '../components/tag.astro';
 ---
 
 <a href={`/${id}`}  class="flex items-center justify-center p-6 lg:p-10 bg-white dark:bg-black/20 rounded-xl shadow-md dark:shadow-lg hover:shadow-xl dark:hover:sm:shadow-indigo-500/20 transition duration-500 dark:sm:border dark:border-slate-800 mb-4 cursor-pointer">
@@ -21,12 +21,7 @@ const { id, title, description, icon, tags } = Astro.props;
       <h2 class="text-2xl font-semibold mb-2">{title}</h2>
       <p class="text-md text-gray-600 mb-3" style="word-break: break-word;">{description}</p>
       <div class="flex flex-wrap gap-2">
-        {tags.map((tag) => (
-          <span
-            class="bg-gray-200 text-gray-600 px-1.5 py-0.5 rounded text-xs"
-            style={`background-color: color-mix(in srgb, ${tag.color} 30%, transparent); box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);`}
-          >{tag.name}</span>
-        ))}
+        {tags.map((tag) => (<Tag tag={tag} />))}
       </div>
     </div>
 </a>

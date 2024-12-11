@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Footer from '../components/Footer.astro';
+import Tag from '../components/tag.astro';
 import { getApps } from '../utils/notion';
 import { marked } from 'marked';
 import { SITE } from '../config';
@@ -28,28 +29,23 @@ const htmlContent = marked(app.content);
       <div class="flex flex-col md:flex-row items-center md:items-start gap-6 p-4">
         <img
           src={app.icon || '/images/avatar.png'}
-          class="w-40 h-40 rounded-lg  object-cover self-center"
+          class="w-40 h-40 rounded-lg  object-cover mt-1"
           alt={app.title}
         />
 
-        <div class="flex-1 w-full">
+        <div class="flex-1 w-full md:pl-2">
           <h1 class="text-5xl font-bold text-center md:text-left mb-4 bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent">
             {app.title}
           </h1>
 
-          <div class="space-y-2 text-gray-600">
+          <div class="space-y-3 text-gray-600">
 
             <div class="flex flex-wrap gap-3 ">
-              {app.tags.map((tag) => (
-                <span
-                class="px-3 py-1 rounded-full text-xs font-medium transition-colors duration-200"
-                style={`background-color: color-mix(in srgb, ${tag.color} 20%, transparent); color: color-mix(in srgb, ${tag.color} 80%, black);`}
-              >{tag.name}</span>
-            ))}
+              {app.tags.map((tag) => (<Tag tag={tag} />))}
             </div>
 
             <p class="flex">
-              <span class="text-gray-700 mr-6">📅 {app.date}</span>
+              <span class="mr-6">🗓️ {app.date}</span>
               {app.link && (
                 <>
                   <a
@@ -65,7 +61,7 @@ const htmlContent = marked(app.content);
             </p>
 
             <p>
-              🤖 {app.desc}
+              💡 {app.desc}
             </p>
 
           </div>
