@@ -41,9 +41,12 @@ export const SITE = {
 
 > notion数据库的icon字段,和页面内markdown的图片链接尽量用链接的形式，否则可能会受到notion referer的限制而无法显示(假设你不公开notion页面)
 
-你可以按下图创建数据库，站点描述默认读取SITE.description, 如果有自定义描述则优先读取自定义描述
+你可以按下图创建数据库：
+- 站点描述默认读取SITE.description, 如果有自定义描述则优先读取自定义描述
+- 图标读取顺序: icon > emoji > title icon
+- created_time 手动填写，如为空则读默认创建时间
 
-![](https://telegram-file.vercel.app/api/file/BQACAgUAAxkDAAP3Z1gOteYx2g0FVsCFy_8VqNWRUVAAApETAAIv6sFWaGSTdqzXHjs2BA.png)
+![](https://telegram-file.vercel.app/api/file/BQACAgUAAxkDAAP4Z1kvN0xp1UAMS8V72_-A7fpJEL8AAtwSAAIv6slWcy9I8ivdEzY2BA.png)
 
 ## 注意事项
 
