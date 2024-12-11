@@ -5,7 +5,9 @@ const notion = new Client({ auth: import.meta.env.NOTION_API_KEY });
 const databaseId = import.meta.env.NOTION_DATABASE_ID;
 
 const formatDate = (date: string) => {
-  return date? new Date(date).toLocaleDateString() : '';
+  if (!date) return '';
+  const d = new Date(date);
+  return `${d.getFullYear()}/${(d.getMonth() + 1).toString().padStart(2, '0')}/${d.getDate().toString().padStart(2, '0')}`;
 }
 
 export async function getApps() {
