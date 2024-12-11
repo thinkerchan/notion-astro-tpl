@@ -10,7 +10,7 @@ interface Props {
 }
 
 const { id, title, description, icon, tags, emoji, isPin } = Astro.props;
-import Tag from '../components/tag.astro';
+import TagItem from '../components/TagItem.astro';
 ---
 
 <div class="relative">
@@ -38,7 +38,7 @@ import Tag from '../components/tag.astro';
       <h2 class="text-2xl font-semibold mb-2">{title}</h2>
       <p class="text-md text-gray-600 mb-3" style="word-break: break-word;">{description}</p>
       <div class="flex flex-wrap gap-2">
-        {tags.map((tag) => (<Tag tag={tag} />))}
+        {tags.map((tag) => (<TagItem tag={tag} />))}
       </div>
     </div>
   </a>

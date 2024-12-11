@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Comment from '../components/Comment.astro';
-import Tag from '../components/Tag.astro';
+import TagItem from '../components/TagItem.astro';
 import Copyright from '../components/Copyright.astro';
 import Header from '../components/Header.astro';
 
@@ -65,7 +65,7 @@ export async function getStaticPaths() {
           <div class="space-y-3 text-gray-600">
 
             <div class="flex flex-wrap gap-3 ">
-              {app.tags.map((tag) => (<Tag tag={tag} />))}
+              {app.tags.map((tag) => (<TagItem tag={tag} />))}
             </div>
 
             <p class="flex">
