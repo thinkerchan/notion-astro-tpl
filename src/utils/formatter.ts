@@ -352,7 +352,6 @@ function _formatRichTexts(richTexts: RichText[]): string {
   }).join('');
 }
 
-
 export function formatter(blocks: any[]) {
   let content = '';
 

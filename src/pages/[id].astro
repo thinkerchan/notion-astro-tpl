@@ -1,10 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Footer from '../components/Footer.astro';
-import Tag from '../components/tag.astro';
+import Comment from '../components/Comment.astro';
+import Tag from '../components/Tag.astro';
+import Copyright from '../components/Copyright.astro';
+import Header from '../components/Header.astro';
+
 import { getApps } from '../utils/notion';
 import { marked } from 'marked';
-import { SITE } from '../config';
+import { SITE } from '../config'
+
+const { app } = Astro.props;
+const htmlContent = marked(app.content);
+
 export async function getStaticPaths() {
   const apps = await getApps();
   return apps.map(app => ({
@@ -12,12 +19,10 @@ export async function getStaticPaths() {
     props: { app },
   }));
 }
-
-const { app } = Astro.props;
-const htmlContent = marked(app.content);
 ---
 
 <Layout title={`${app.title} | ${SITE.author}`}>
+  <Header SITE={SITE}/>
   <main class="max-w-5xl  mx-auto px-4 lg:px-12  py-12">
     <div class="mx-auto bg-white rounded-lg shadow-md p-6 relative">
       <div class="absolute left-4 top-4 text-gray-600 hover:text-gray-900">
@@ -26,12 +31,31 @@ const htmlContent = marked(app.content);
         </a>
       </div>
 
+      {
+        app.isPin && (
+        <i class="absolute top-4 right-4">
+        <svg t="1733886390417" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5352" width="32" height="32"><path d="M648.728381 130.779429a73.142857 73.142857 0 0 1 22.674286 15.433142l191.561143 191.756191a73.142857 73.142857 0 0 1-22.137905 118.564571l-67.876572 30.061715-127.341714 127.488-10.093714 140.239238a73.142857 73.142857 0 0 1-124.684191 46.445714l-123.66019-123.782095-210.724572 211.699809-51.833904-51.614476 210.846476-211.821714-127.926857-128.024381a73.142857 73.142857 0 0 1 46.299428-124.635429l144.237715-10.776381 125.074285-125.220571 29.379048-67.779048a73.142857 73.142857 0 0 1 96.207238-38.034285z" p-id="5353" fill="#8a8a8a"></path></svg>
+        </i>)
+      }
+
       <div class="flex flex-col md:flex-row items-center md:items-start gap-6 p-4">
-        <img
-          src={app.icon || '/images/avatar.png'}
-          class="w-40 h-40 rounded-lg  object-cover mt-1"
-          alt={app.title}
-        />
+        {app.icon ? (
+          <img
+            src={app.icon}
+            class="w-40 h-40 rounded-lg object-cover mt-1"
+            alt={app.title}
+          />
+        ) : app.emoji ? (
+          <div class="w-40 h-40 rounded-lg mt-1 flex items-center justify-center text-9xl">
+            {app.emoji}
+          </div>
+        ) : (
+          <img
+            src="/images/avatar.png"
+            class="w-40 h-40 rounded-lg object-cover mt-1"
+            alt={app.title}
+          />
+        )}
 
         <div class="flex-1 w-full md:pl-2">
           <h1 class="text-5xl font-bold text-center md:text-left mb-4 bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent">
@@ -61,7 +85,7 @@ const htmlContent = marked(app.content);
             </p>
 
             <p>
-              💡 {app.desc}
+              💡 {app.desc || '暂无描述'}
             </p>
 
           </div>
@@ -77,13 +101,8 @@ const htmlContent = marked(app.content);
       <div id="Jcomment"></div>
     </div>
 
-    <div class="flex text-gray-400 text-sm align-middle justify-center mt-4" style={ SITE.pv?'':'display:none;'}>
-        <span id="busuanzi_container_site_pv">
-          @{SITE.author} PV
-          <span id="busuanzi_value_site_pv"></span>
-        </span>
-    </div>
+    <Copyright SITE={SITE} />
 
   </main>
-  <Footer />
+  <Comment />
 </Layout>

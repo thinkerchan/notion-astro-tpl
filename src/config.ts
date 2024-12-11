@@ -1,6 +1,6 @@
 export const SITE = {
   "title": "My Side Works",
-  "author": "ThinkerChan",
+  "author": "kaka",
   "twitter":"thinkerchan",
   "github":"thinkerchan/notion-astro-tpl",
   "description": "thinkerchan",

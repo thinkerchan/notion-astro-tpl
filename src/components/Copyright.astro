@@ -1,0 +1,12 @@
+---
+const { SITE } = Astro.props;
+---
+{SITE.pv ?<script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>:''}
+
+<div class="flex text-gray-400 text-sm align-middle justify-center mt-10" style={ SITE.pv?'':'display:none;'}>
+  <span id="busuanzi_container_site_pv">
+    <a href="https://github.com/thinkerchan/notion-astro-tpl" target="_blank" rel="noopener noreferrer">@ThinkerChan</a>
+
+    {SITE.pv && <span>, PV<span id="busuanzi_value_site_pv"></span></span>}
+  </span>
+</div>

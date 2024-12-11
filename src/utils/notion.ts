@@ -4,9 +4,13 @@ import { formatter } from './formatter';
 const notion = new Client({ auth: import.meta.env.NOTION_API_KEY });
 const databaseId = import.meta.env.NOTION_DATABASE_ID;
 
+const formatDate = (date: string) => {
+  return date? new Date(date).toLocaleDateString() : '';
+}
+
 export async function getApps() {
   if (!import.meta.env.NOTION_API_KEY || !import.meta.env.NOTION_DATABASE_ID) {
-    console.error('NOTION_API_KEY或NOTION_DATABASE_ID未定义');
+    console.error(' check your .env file, NOTION_API_KEY or NOTION_DATABASE_ID is not defined');
     return [];
   }
   return fetchAppsFromNotion();
@@ -39,7 +43,8 @@ async function fetchAppsFromNotion() {
           id: pageId,
           title: props.title.title[0]?.plain_text,
           desc: props.desc.rich_text[0]?.plain_text,
-          icon: props.icon.files[0]?.type === 'external' ? props.icon.files[0].external.url : props.icon.files[0]?.file.url,
+          icon: props.icon.files[0]?.type === 'external' ? props.icon.files[0].external.url : props.icon.files[0]?.file.url||'',
+          emoji: props.emoji.rich_text[0]?.plain_text,
           link: props.link.url,
           tags: props.tags.multi_select.map((tag: any) => {
             return {
@@ -48,12 +53,20 @@ async function fetchAppsFromNotion() {
             }
           }) || [],
           content: formatter(pageBlocks.results),
-          date: page.created_time? new Date(page.created_time).toLocaleDateString() : '',
+          date: formatDate(props.created_time.date?.start || page.created_time),
+          isPin: props.pin.checkbox
         };
       })
     );
 
-    return apps;
+    return apps.sort((a, b) => {
+      if (a.isPin === b.isPin) {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      }
+      if (a.isPin) return -1;
+      return 1;
+    });
+
   } catch (error) {
     console.error('notion error:', error);
     return [];

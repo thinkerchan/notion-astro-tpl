@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import AppCard from '../components/AppCard.astro';
 import Header from '../components/Header.astro';
+import Copyright from '../components/Copyright.astro';
+
 import { getApps, getDatabase } from '../utils/notion';
 import { SITE } from '../config';
 
@@ -10,7 +12,7 @@ const db = await getDatabase();
 ---
 
 <Layout title={`${SITE.author}`}>
-  <Header />
+  <Header SITE={SITE}/>
   <main class="container min-h-full mx-auto px-4 lg:px-12  pb-20">
     <h1 class="text-4xl lg:text-6xl font-bold text-center py-16  bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-secondary-500">
       {db.description || SITE.title}
@@ -21,10 +23,14 @@ const db = await getDatabase();
             title={app.title}
             description={app.desc}
             icon={app.icon}
+            emoji={app.emoji}
             tags={app.tags}
             id={app.id}
+            isPin={app.isPin}
           />
       ))}
     </div>
+
+    <Copyright SITE={SITE}/>
   </main>
 </Layout>
