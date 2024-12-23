@@ -110,7 +110,7 @@ export async function getStaticPaths() {
 
   <script type="module" is:inline define:vars={{app}}>
     import { marked } from "/js/marked.esm.js";
-    if (!app.content && app.readme && app.readme.startsWith('https://')) {
+    if (!app.content && app.readme && app.readme.startsWith('https://raw.githubusercontent.com/')) {
       fetch(app.readme)
         .then(res => res.text())
         .then(data => {
