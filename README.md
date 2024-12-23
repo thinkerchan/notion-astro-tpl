@@ -1,6 +1,10 @@
 # notion-astro-tpl
 > 如果你想展示你的个人作品又不想开发网站，可以试试这个模板，基于Astro和Notion API实现
 
+## 更新记录
+- 2024/12/23 支持readme链接（优先级小于文章内容）
+- 2024/09/11 第一版
+
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
@@ -46,7 +50,7 @@ export const SITE = {
 - 图标读取顺序: icon > emoji > title icon
 - created_time 手动填写，如为空则读默认创建时间
 
-![](https://telegram-file.vercel.app/api/file/BQACAgUAAxkDAAP4Z1kvN0xp1UAMS8V72_-A7fpJEL8AAtwSAAIv6slWcy9I8ivdEzY2BA.png)
+![](https://telegram-file.vercel.app/api/file/BQACAgUAAxkDAAP8Z2kdVMwC397WCTUNrfHHmMhJ9aQAAoARAALO_0lXnvHR2X4fSPk2BA.png)
 
 ## 注意事项
 

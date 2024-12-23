@@ -48,6 +48,7 @@ async function fetchAppsFromNotion() {
           icon: props.icon.files[0]?.type === 'external' ? props.icon.files[0].external.url : props.icon.files[0]?.file.url||'',
           emoji: props.emoji.rich_text[0]?.plain_text || page.icon?.emoji || '',
           link: props.link.url,
+          readme: props.readme.url,
           tags: props.tags.multi_select.map((tag: any) => {
             return {
               name: tag.name,

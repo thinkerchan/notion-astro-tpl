@@ -58,7 +58,7 @@ export async function getStaticPaths() {
         )}
 
         <div class="flex-1 w-full md:pl-2">
-          <h1 class="text-5xl font-bold text-center md:text-left mb-4 bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent">
+          <h1 class="text-5xl font-bold text-center md:text-left mb-2 bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent leading-tight">
             {app.title}
           </h1>
 
@@ -95,14 +95,30 @@ export async function getStaticPaths() {
       <hr class="mb-6">
 
       <div class="mb-6">
-         <div class="markdown-body" set:html={htmlContent}></div>
+         {htmlContent ? (
+           <div class="markdown-body" set:html={htmlContent}></div>
+         ) : (
+           <div class="markdown-body" id="Jreadme"></div>
+         )}
       </div>
 
       <div id="Jcomment"></div>
     </div>
 
     <Copyright SITE={SITE} />
-
   </main>
+
+  <script type="module" is:inline define:vars={{app}}>
+    import { marked } from "/js/marked.esm.js";
+    if (!app.content && app.readme && app.readme.startsWith('https://')) {
+      fetch(app.readme)
+        .then(res => res.text())
+        .then(data => {
+          let str = data.replace(/^#\s+(?!#).*$/gm, '');
+          let html = marked(str);
+          document.getElementById('Jreadme').innerHTML = html;
+        })
+    }
+  </script>
   <Comment />
 </Layout>
