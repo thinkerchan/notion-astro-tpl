@@ -23,89 +23,124 @@ export async function getStaticPaths() {
 
 <Layout title={`${app.title} | ${SITE.author}`}>
   <Header SITE={SITE}/>
-  <main class="max-w-5xl  mx-auto px-4 lg:px-12  py-12">
-    <div class="mx-auto bg-white rounded-lg shadow-md p-6 relative">
-      <div class="absolute left-4 top-4 text-gray-600 hover:text-gray-900">
-        <a href="/">
-          <svg t="1733825105812" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1462" width="28" height="28"><path d="M622.651 263.568h-174.906v-142.078l-383.764 191.881 383.763 191.882 0-141.752h189.391c149.914 0 224.855 62.789 224.855 188.368 0 129.928-77.436 194.876-232.339 194.876h-441.7v99.932h446.194c211.185 0 316.778-95.104 316.778-285.311-0-198.521-109.414-297.798-328.274-297.798z" p-id="1463" fill="#8a8a8a"></path></svg>
+
+  <main class="min-h-screen" style="background-color: rgb(248 250 252);">
+    <div class="container mx-auto max-w-6xl px-4 lg:px-6 py-6 sm:py-8">
+
+      <!-- 返回导航 -->
+      <div class="mb-6 sm:mb-8">
+        <a
+          href="/"
+          class="inline-flex items-center justify-center w-10 h-10 bg-neutral-100 hover:bg-neutral-200 text-neutral-600 hover:text-neutral-900 transition-all duration-200"
+          aria-label="返回首页"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+          </svg>
         </a>
       </div>
 
-      {
-        app.isPin && (
-        <i class="absolute top-4 right-4">
-        <svg t="1733886390417" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5352" width="30" height="30"><path d="M648.728381 130.779429a73.142857 73.142857 0 0 1 22.674286 15.433142l191.561143 191.756191a73.142857 73.142857 0 0 1-22.137905 118.564571l-67.876572 30.061715-127.341714 127.488-10.093714 140.239238a73.142857 73.142857 0 0 1-124.684191 46.445714l-123.66019-123.782095-210.724572 211.699809-51.833904-51.614476 210.846476-211.821714-127.926857-128.024381a73.142857 73.142857 0 0 1 46.299428-124.635429l144.237715-10.776381 125.074285-125.220571 29.379048-67.779048a73.142857 73.142857 0 0 1 96.207238-38.034285z" p-id="5353" fill="#8a8a8a"></path></svg>
-        </i>)
-      }
+      <!-- 项目信息卡片 -->
+      <div class="max-w-4xl mx-auto">
+        <article class="bg-white border border-neutral-200 p-6 sm:p-8 mb-8 animate-fade-in">
 
-      <div class="flex flex-col md:flex-row items-center md:items-start gap-6 p-4">
-        {app.icon ? (
-          <img
-            src={app.icon}
-            class="w-40 h-40 rounded-lg object-cover mt-1"
-            alt={app.title}
-          />
-        ) : app.emoji ? (
-          <div class="w-40 h-40 rounded-lg mt-1 flex items-center justify-center text-8xl">
-            {app.emoji}
-          </div>
-        ) : (
-          <img
-            src="/images/avatar.png"
-            class="w-40 h-40 rounded-lg object-cover mt-1"
-            alt={app.title}
-          />
-        )}
+          <!-- 项目头部 -->
+          <div class="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 mb-6 sm:mb-8">
+            <!-- 图标 -->
+            <div class="flex-shrink-0 relative">
+              {app.icon ? (
+                <img
+                  src={app.icon}
+                  class="w-20 h-20 sm:w-24 sm:h-24 object-cover"
+                  alt={app.title}
+                />
+              ) : app.emoji ? (
+                <div class="w-20 h-20 sm:w-24 sm:h-24 bg-neutral-100 flex items-center justify-center text-3xl sm:text-4xl">
+                  {app.emoji}
+                </div>
+              ) : (
+                <img
+                  src="/images/avatar.png"
+                  class="w-20 h-20 sm:w-24 sm:h-24 object-cover"
+                  alt={app.title}
+                />
+              )}
 
-        <div class="flex-1 w-full md:pl-2">
-          <h1 class="text-5xl font-bold text-center md:text-left mb-2 bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent leading-tight">
-            {app.title}
-          </h1>
-
-          <div class="space-y-3 text-gray-600">
-
-            <div class="flex flex-wrap gap-3 ">
-              {app.tags.map((tag) => (<TagItem tag={tag} />))}
+              <!-- 精选标识 -->
+              {app.isPin && (
+                <div class="absolute -top-2 -right-2 w-6 h-6 bg-amber-400 rounded-full flex items-center justify-center shadow-md" title="精选项目">
+                  <svg class="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                </div>
+              )}
             </div>
 
-            <p class="flex">
-              <span class="mr-6">🗓️ {app.date}</span>
-              {app.link && (
-                <>
+            <!-- 项目信息 -->
+            <div class="flex-1">
+              <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-900 leading-tight mb-3 sm:mb-4">
+                {app.title}
+              </h1>
+
+              <!-- 描述 -->
+              <p class="text-sm sm:text-base text-neutral-600 mb-3 sm:mb-4 leading-relaxed">
+                {app.desc || '暂无描述'}
+              </p>
+
+              <!-- 标签 -->
+              {app.tags.length > 0 && (
+                <div class="flex flex-wrap gap-2 mb-3 sm:mb-4">
+                  {app.tags.map((tag) => (<TagItem tag={tag} />))}
+                </div>
+              )}
+
+              <!-- 元信息 -->
+              <div class="flex flex-wrap items-center gap-4 sm:gap-6 text-xs sm:text-sm text-neutral-500">
+                <div class="flex items-center">
+                  <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                  </svg>
+                  {app.date}
+                </div>
+
+                {app.link && (
                   <a
                     href={app.link}
-                    class="text-primary-500 hover:text-primary-600 transition-colors break-all flex items-center gap-1 text-blue-400"
+                    class="bg-accent-500 text-white px-4 py-2 font-medium transition-all duration-200 hover:bg-accent-600 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 inline-flex items-center text-xs sm:text-sm"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    🔗 点此访问
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                    </svg>
+                    访问项目
                   </a>
-                </>
-              )}
-            </p>
-
-            <p>
-              💡 {app.desc || '暂无描述'}
-            </p>
-
+                )}
+              </div>
+            </div>
           </div>
-        </div>
+
+          <!-- 分隔线 -->
+          <div class="border-t border-neutral-200 my-6 sm:my-8"></div>
+
+          <!-- 详细内容 -->
+          <div class="prose max-w-none">
+            {htmlContent ? (
+              <div class="markdown-body" set:html={htmlContent}></div>
+            ) : (
+              <div class="markdown-body" id="Jreadme"></div>
+            )}
+          </div>
+
+          <!-- 评论区域 -->
+          <div class="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-neutral-200">
+            <div id="Jcomment"></div>
+          </div>
+        </article>
       </div>
 
-      <hr class="mb-6">
-
-      <div class="mb-6">
-         {htmlContent ? (
-           <div class="markdown-body" set:html={htmlContent}></div>
-         ) : (
-           <div class="markdown-body" id="Jreadme"></div>
-         )}
-      </div>
-
-      <div id="Jcomment"></div>
+      <Copyright SITE={SITE} />
     </div>
-
-    <Copyright SITE={SITE} />
   </main>
 
   <script type="module" is:inline define:vars={{app}}>

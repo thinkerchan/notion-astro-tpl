@@ -2,51 +2,145 @@
 @tailwind components;
 @tailwind utilities;
 
-html{
-  overflow-x: hidden;
-}
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  min-height: 100vh;
+@layer base {
+  html {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    background-color: rgb(248 250 252);
+    color: #171717;
+    line-height: 1.6;
+  }
+
+  /* 简洁的滚动条 */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f5f5f5;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #d4d4d4;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a3a3a3;
+  }
 }
 
-.bg-gradient-to-r {
-  background-image: linear-gradient(to right,var(--tw-gradient-stops))
+@layer components {
+  .card-clean {
+    @apply bg-white border border-neutral-200 transition-all duration-200 ease-out;
+  }
+
+  .card-clean:hover {
+    @apply shadow-soft border-neutral-300;
+  }
+
+  .btn-primary {
+    @apply bg-accent-500 text-white px-4 py-2 font-medium transition-all duration-200 hover:bg-accent-600 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-neutral-700 px-4 py-2 font-medium border border-neutral-300 transition-all duration-200 hover:bg-neutral-50 hover:border-neutral-400;
+  }
+
+  .text-heading {
+    @apply text-neutral-900 font-semibold;
+  }
+
+  .text-body {
+    @apply text-neutral-700;
+  }
+
+  .text-muted {
+    @apply text-neutral-500;
+  }
 }
 
-.from-primary-500 {
-  --tw-gradient-from: #0a62ef var(--tw-gradient-from-position);
-  --tw-gradient-to: rgba(123, 169, 244, 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to)
+/* Markdown 样式 - 简约风格 */
+.markdown-body {
+  @apply text-neutral-700 leading-relaxed;
+  font-size: 14px;
 }
 
-.to-secondary-500 {
-  --tw-gradient-to: #e95ea3 var(--tw-gradient-to-position);
+@media (min-width: 640px) {
+  .markdown-body {
+    font-size: 16px;
+  }
 }
 
-.markdown-body img{
-  display: block;
-  /* width: 100%; */
-  @apply shadow-sm m-auto;
+.markdown-body img {
+  @apply block mx-auto my-4 sm:my-6 max-w-full h-auto border border-neutral-200;
 }
 
-.markdown-body iframe{
-  aspect-ratio: 16 / 9;
-  display: block;
-  width: 100%;
-  @apply shadow-sm m-auto mb-4;
+.markdown-body iframe {
+  @apply aspect-video block w-full mx-auto mb-4 sm:mb-6 border border-neutral-200;
 }
 
-.markdown-body img,
-.img{
-  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAAAllBMVEUAAADOzs7Ly8vNzc3Nzc3Nzc3Ozs7Nzc3Nzc3Nzc3JycnNzc3Nzc3Ozs7Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Ozs7MzMzNzc3MzMzOzs7Ozs7MzMzMzMzNzc3Nzc3Nzc3Ozs7Nzc3Nzc3Nzc3Ozs7Nzc3Nzc3MzMzOzs7Nzc3Nzc3Nzc3Ly8vNzc3Nzc3Nzc3Nzc3MzMzNzc0bkv8iAAAAMXRSTlMAv4DIuH+IvyiYD7RUSurXzaGNhnc+M8SmJBcF9ebh25JqZ6twWU9D+sNgOx7SsO8KTvUMuwAAAzpJREFUaN7tmOmSqjAQRnuEGZFNQeEq4r7v9vu/3L0Tqwm4JETDrZopT/kDKOIpSH9tIrx5UzUfFVGUYCW8JT9DUivBJ/tIqV+4I/kEbdTwG+Mt+cUS24osu1KJNx6xoc22V5XEc5DT2FcicbHAcFuBpIPX1LRLXLwl0i1p4S3NvV7JNHtHS9taBDT7eiUGMoyk+PI8nZIeMnwgYmSMdUomyFjyKw12YaRTMmYjDsDZIsPWKJmxEQFwLGRYCpKpJ5aYbEQIHJuiUlbSDzHdCSXBzUphqfgk1hERB5ZI0mYjTr1cu1Kbk2XzMquJQLJCxhGIBJWqa05Z3ggkfR8ZKx5OhZzYDcw4Cix0W+fy8L5K4mMDcwSPJTHd43+EwYFOHCghWaRYIBTG8RavhKSNOWQBHd06XJBKQgczfDqYPLZsrh0dkEvqmGFGWzpcyMJCtFxQkoQ2wCedrASz38ie2JgCqEgG20KRppYoL147MGfjCYu+gsSJ4QJN0TABOWqSWp+unmmtcNAsGbjA6fm0L9MqcYrvNuINRp+kBlcsyBJok3iCtWhbg+RhowrJMocc067eTdDsJvosqA2tkv7mOvp9FtO2Tgnsh2SxLoXtUDvUKIHdGi+c7O+zFjknOiV8KzL8dzzAjIVOCV9btCaYx9MpgS+8S7rTKYHgvmVg6ZRAvfjlR9rA2Tol+yZyjKhPUkOXhFJOdPcACVWyqVEy545ZxDI5JKU2SYhEShmMT7Tl1STpItHk2VjRtS8dkoSXlmnd6wSd1yUxL6yGff8fg8mrEveEROfhD6f7mmTOE7gQ9JvoFcmYJ3An2gyl1vOSLk9gIi48335SYm9Qvloxqbifk8QjUqyn8BDb4G1MXbJMcwkUsB9RiNQl83wChcQ+dTVVScgTeAYJ0fq5f+5muQTKWdLNNQXJ2aBRvgtl2PIGU1ZiDbMExnJBcQbdkhJvLUig9JczKiWZyhMobEBWCUlbkEAhAY2zZRLerUYrUMShYpFI+EbB7IEqZxrcFEp6wyyBfVAnOdDKXCBZiRMoxxog8UiylSVQzi6VSOp/iODraWYyCeqkesnof0hav1vCqJvaaDkMePOmYv4CScE0fGuuCnYAAAAASUVORK5CYII=") no-repeat center center;
-  background-size: 30px;
+.markdown-body ul {
+  @apply list-disc ml-4 sm:ml-6 space-y-1;
 }
 
-.markdown-body ul{
-  list-style: disc;
+.markdown-body ol {
+  @apply list-decimal ml-4 sm:ml-6 space-y-1;
 }
 
-.markdown-body ol{
-  list-style: decimal;
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  @apply font-semibold mt-6 sm:mt-8 mb-3 sm:mb-4 text-neutral-900;
+}
+
+.markdown-body h1 {
+  @apply text-2xl sm:text-3xl;
+}
+
+.markdown-body h2 {
+  @apply text-xl sm:text-2xl;
+}
+
+.markdown-body h3 {
+  @apply text-lg sm:text-xl;
+}
+
+.markdown-body h4 {
+  @apply text-base sm:text-lg;
+}
+
+.markdown-body p {
+  @apply mb-3 sm:mb-4 text-neutral-700;
+}
+
+/* 移除代码块自定义样式，使用github-markdown.min.css默认样式 */
+
+.markdown-body blockquote {
+  @apply border-l-4 border-neutral-300 pl-3 sm:pl-4 py-2 bg-neutral-50 my-3 sm:my-4 italic text-neutral-600 text-sm sm:text-base;
+}
+
+.markdown-body a {
+  @apply text-accent-500 hover:text-accent-600 transition-colors;
+}
+
+.markdown-body table {
+  @apply w-full border-collapse  border-neutral-300 my-3 sm:my-4 text-sm sm:text-base;
+}
+
+.markdown-body th,
+.markdown-body td {
+  @apply border border-neutral-300 px-2 sm:px-4 py-1.5 sm:py-2;
+}
+
+.markdown-body th {
+  @apply bg-neutral-50 font-semibold;
 }

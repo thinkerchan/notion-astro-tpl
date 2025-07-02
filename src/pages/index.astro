@@ -13,24 +13,51 @@ const db = await getDatabase();
 
 <Layout title={`${SITE.author}`}>
   <Header SITE={SITE}/>
-  <main class="container min-h-full mx-auto px-4 lg:px-12  pb-20">
-    <h1 class="text-4xl lg:text-6xl font-bold text-center py-16  bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-secondary-500">
-      {db.description || SITE.title}
-    </h1>
-    <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-10 lg:gap-y-6">
-      {apps.map((app) => (
-          <AppCard
-            title={app.title}
-            description={app.desc}
-            icon={app.icon}
-            emoji={app.emoji}
-            tags={app.tags}
-            id={app.id}
-            isPin={app.isPin}
-          />
-      ))}
-    </div>
 
-    <Copyright SITE={SITE}/>
+  <main class="min-h-screen" style="background-color: rgb(248 250 252);">
+    <!-- 标题区域 -->
+    <section class="py-12 sm:py-16 lg:py-20">
+      <div class="container mx-auto px-4 lg:px-6 max-w-6xl">
+        <div class="text-center">
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-neutral-900 mb-4 sm:mb-6 leading-tight">
+            {db.description || SITE.title}
+          </h1>
+
+          <p class="text-base sm:text-lg text-neutral-600 mb-8 sm:mb-12 max-w-2xl mx-auto">
+            探索我的作品集，发现创新的应用和项目
+          </p>
+
+          <!-- 简单统计 -->
+          <div class="flex justify-center gap-6 sm:gap-8 text-sm text-neutral-500 mb-8">
+            <span>{apps.length} 个项目</span>
+            <span>{apps.filter(app => app.isPin).length} 个精选</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 项目列表区域 -->
+    <section class="pb-16">
+      <div class="container mx-auto px-4 lg:px-6 max-w-6xl">
+        <!-- 响应式网格布局：手机1列，平板2列，桌面3列 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
+          {apps.map((app) => (
+            <AppCard
+              title={app.title}
+              description={app.desc}
+              icon={app.icon}
+              emoji={app.emoji}
+              tags={app.tags}
+              id={app.id}
+              isPin={app.isPin}
+            />
+          ))}
+        </div>
+
+        <div class="mt-12 sm:mt-16">
+          <Copyright SITE={SITE}/>
+        </div>
+      </div>
+    </section>
   </main>
 </Layout>

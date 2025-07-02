@@ -9,18 +9,18 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="App Showcase" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <link rel="stylesheet" href="/css/github-markdown.min.css">
     <link rel="stylesheet" href={SITE.cmtCss}>
   </head>
-  <body class="bg-slate-50 text-slate-900" >
+  <body>
     <slot />
     <script defer src="https://tongji.linkroutes.com/script.js" data-website-id="88ec7da4-8933-40cd-b16f-b2c35d11230d"></script>
     {

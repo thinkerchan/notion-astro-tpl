@@ -3,10 +3,11 @@ const { SITE } = Astro.props;
 ---
 {SITE.pv ?<script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>:''}
 
-<div class="flex text-gray-400 text-sm align-middle justify-center mt-10" style={ SITE.pv?'':'display:none;'}>
+<div class="text-center text-neutral-500 text-sm py-8" style={ SITE.pv?'':'display:none;'}>
   <span id="busuanzi_container_site_pv">
-    <a href="https://github.com/thinkerchan/notion-astro-tpl" target="_blank" rel="noopener noreferrer">@ThinkerChan</a>
-
-    {SITE.pv && <span>, PV<span id="busuanzi_value_site_pv"></span></span>}
+    <a href="https://github.com/thinkerchan/notion-astro-tpl" target="_blank" rel="noopener noreferrer" class="text-neutral-600 hover:text-neutral-900 transition-colors duration-200">
+      @ThinkerChan
+    </a>
+    {SITE.pv && <span> · PV <span id="busuanzi_value_site_pv"></span></span>}
   </span>
 </div>
