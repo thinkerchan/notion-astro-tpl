@@ -16,19 +16,15 @@ const db = await getDatabase();
 
   <main class="min-h-screen" style="background-color: rgb(248 250 252);">
     <!-- 标题区域 -->
-    <section class="py-12 sm:py-16 lg:py-20">
+    <section class="pt-10 sm:pt-12 lg:pt-16">
       <div class="container mx-auto px-4 lg:px-6 max-w-6xl">
         <div class="text-center">
-          <h1 class="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-neutral-900 mb-4 sm:mb-6 leading-tight">
+          <h1 class="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 leading-tight ">
             {db.description || SITE.title}
           </h1>
 
-          <p class="text-base sm:text-lg text-neutral-600 mb-8 sm:mb-12 max-w-2xl mx-auto">
-            探索我的作品集，发现创新的应用和项目
-          </p>
-
           <!-- 简单统计 -->
-          <div class="flex justify-center gap-6 sm:gap-8 text-sm text-neutral-500 mb-8">
+          <div class="flex justify-center gap-6 sm:gap-8 text-sm text-neutral-500 pt-4 pb-8 lg:pb-12">
             <span>{apps.length} 个项目</span>
             <span>{apps.filter(app => app.isPin).length} 个精选</span>
           </div>
