@@ -2,7 +2,7 @@
 > 如果你想展示你的个人作品又不想开发网站，可以试试这个模板，基于Astro和Notion API实现
 
 ## 更新记录
-- 205/07 页面样式优化
+- 2025/07 页面样式优化
 - 2024/12/23 支持readme链接【startsWith('https://raw.githubusercontent.com/') 且优先级小于文章内容】
 - 2024/09/11 第一版
 
