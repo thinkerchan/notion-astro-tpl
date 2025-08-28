@@ -25,8 +25,8 @@ const db = await getDatabase();
 
           <!-- 简单统计 -->
           <div class="flex justify-center gap-6 sm:gap-8 text-sm text-neutral-500 pt-4 pb-8 lg:pb-12">
-            <span>{apps.length} 个项目</span>
-            <span>{apps.filter(app => app.isPin).length} 个精选</span>
+            <span>{apps.filter(app=>!app.isPin && app.title).length} 个项目</span>
+            <span>{apps.filter(app => app.isPin).length > 0 ? `${apps.filter(app => app.isPin).length} 个精选` : ''}</span>
           </div>
         </div>
       </div>
@@ -38,6 +38,7 @@ const db = await getDatabase();
         <!-- 响应式网格布局：手机1列，平板2列，桌面3列 -->
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
           {apps.map((app) => (
+            app.title && (
             <AppCard
               title={app.title}
               description={app.desc}
@@ -47,6 +48,7 @@ const db = await getDatabase();
               id={app.id}
               isPin={app.isPin}
             />
+            )
           ))}
         </div>
 
