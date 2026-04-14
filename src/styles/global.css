@@ -44,6 +44,28 @@
     @apply shadow-soft border-neutral-300;
   }
 
+  /* Liquid Glass 卡片样式 (AppCard) */
+  .card-glass {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    @apply shadow-glass transition-all duration-300 ease-out;
+  }
+
+  .card-glass:hover {
+    @apply shadow-glass-hover;
+    background: rgba(255, 255, 255, 0.55);
+    transform: translateY(-3px);
+  }
+
+  .glass-light {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+  }
+
   .btn-primary {
     @apply bg-accent-500 text-white px-4 py-2 font-medium transition-all duration-200 hover:bg-accent-600 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2;
   }

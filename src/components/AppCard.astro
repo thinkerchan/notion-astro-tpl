@@ -14,35 +14,35 @@ import TagItem from '../components/TagItem.astro';
 import PinBadge from '../components/PinBadge.astro';
 ---
 
-<div class="relative animate-fade-in h-full">
+<div class="relative animate-fade-up h-full">
   <!-- 精选标识 -->
   <PinBadge isPin={isPin} size="sm" />
 
   <a
     href={`/${id}`}
-    class="card-clean block p-4 sm:p-6 hover:transform hover:translate-y-[-2px] transition-all duration-200 h-full flex flex-col rounded-none"
+    class="card-glass block p-4 sm:p-5 h-full flex flex-col"
   >
     <div class="flex items-start gap-3 sm:gap-4 flex-1">
       <!-- 图标区域 -->
-      <div class="flex-shrink-0 ">
+      <div class="flex-shrink-0">
         {icon ? (
           <img
             src={icon}
-            class="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded-lg"
-            width="64"
-            height="64"
+            class="w-12 h-12 sm:w-14 sm:h-14 object-cover rounded-2xl shadow-glass-sm"
+            width="56"
+            height="56"
             alt={title}
           />
         ) : emoji ? (
-          <div class="w-12 h-12 sm:w-16 sm:h-16 bg-neutral-100 flex items-center justify-center text-xl sm:text-2xl rounded-lg">
+          <div class="w-12 h-12 sm:w-14 sm:h-14 glass-light flex items-center justify-center text-xl sm:text-2xl rounded-2xl">
             {emoji}
           </div>
         ) : (
           <img
             src="/images/avatar.png"
-            class="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded-lg"
-            width="64"
-            height="64"
+            class="w-12 h-12 sm:w-14 sm:h-14 object-cover rounded-2xl shadow-glass-sm"
+            width="56"
+            height="56"
             alt={title}
           />
         )}
@@ -50,22 +50,22 @@ import PinBadge from '../components/PinBadge.astro';
 
       <!-- 内容区域 -->
       <div class="flex-1 min-w-0">
-        <h2 class="text-base sm:text-lg font-semibold text-neutral-900 line-clamp-2 leading-tight mb-2">
+        <h2 class="text-base sm:text-lg font-semibold text-neutral-800 line-clamp-2 leading-tight mb-1.5">
           {title}
         </h2>
 
-        <p class="text-xs sm:text-sm text-neutral-600 mb-3 line-clamp-3 leading-relaxed">
+        <p class="text-xs sm:text-sm text-neutral-500 mb-3 line-clamp-3 leading-relaxed">
           {description}
         </p>
       </div>
     </div>
 
-    <!-- 标签区域 - 移到底部 -->
+    <!-- 标签区域 -->
     {tags.length > 0 && (
-      <div class="flex flex-wrap gap-1 mt-auto pt-2">
+      <div class="flex flex-wrap gap-1.5 mt-auto pt-2">
         {tags.slice(0, 3).map((tag) => (<TagItem tag={tag} />))}
         {tags.length > 3 && (
-          <span class="text-xs text-neutral-400 px-2 py-1">
+          <span class="text-xs text-neutral-400 px-2 py-0.5">
             +{tags.length - 3}
           </span>
         )}
