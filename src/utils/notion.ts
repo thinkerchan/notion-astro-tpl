@@ -33,6 +33,12 @@ async function fetchAppsFromNotion() {
   try {
     const response = await notion.databases.query({
       database_id: databaseId,
+      filter: {
+        property: 'hidden',
+        checkbox: {
+          equals: false,
+        },
+      },
     });
 
     const apps = await Promise.all(
